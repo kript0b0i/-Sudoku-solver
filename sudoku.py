@@ -88,6 +88,9 @@ if __name__ == '__main__':
     ]
 
     script_start= datetime.now()
+    print("Get solution for:")
+    pprint(example_board)
+
     print("[%]Looking for solution...")
     if(solve_sudoku(example_board)):
         print("[*]solution found")
@@ -96,3 +99,4 @@ if __name__ == '__main__':
         print("[x]please check your sudoku")
     script_end_time = datetime.now()
     print(f"time to find solution: {script_end_time-script_start}")
+
