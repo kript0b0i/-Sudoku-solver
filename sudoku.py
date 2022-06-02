@@ -1,4 +1,5 @@
 from pprint import pprint
+from datetime import datetime
 
 
 def find_next_empty(puzzle):
@@ -10,7 +11,7 @@ def find_next_empty(puzzle):
     """
     for r in range(9):
         for c in range(9):
-            if puzzle[r][c] == -1:
+            if puzzle[r][c] == 0:
                 return r, c
     return None, None
 
@@ -52,8 +53,8 @@ def solve_sudoku(puzzle):
     """
     row, col = find_next_empty(puzzle)
 
-    pprint(example_board)
-    print("------------")
+    #pprint(example_board)
+    #print("------------")
 
     if row is None:
         return True
@@ -66,25 +67,32 @@ def solve_sudoku(puzzle):
             if solve_sudoku(puzzle):
                 return True
 
-        puzzle[row][col] = -1
+        puzzle[row][col] = 0
 
     return False
 
+
 if __name__ == '__main__':
     example_board = [
-        [-1, 8, -1,   7, -1, 1,   -1, 3, -1],
-        [4, -1, 9,   -1, -1, -1,   -1, -1, -1],
-        [-1, 5, -1,   -1, 6, -1,   4, 1, 8],
+        [0, 8, 0,   7, 0, 1,   0, 3, 0],
+        [4, 0, 9,   0, 0, 0,   0, 0, 0],
+        [0, 5, 0,   0, 6, 0,   4, 1, 8],
 
-        [7, -1, -1,   -1, -1, 9,   -1, -1, -1],
-        [8, -1, -1,   6, 1, -1,   5, -1, -1],
-        [-1, 3, 5,   -1, -1, -1,   -1, 2, 9],
+        [7, 0, 0,   0, 0, 9,   0, 0, 0],
+        [8, 0, 0,   6, 1, 0,   5, 0, 0],
+        [0, 3, 5,   0, 0, 0,   0, 2, 9],
 
-        [-1, 6, -1,   4, -1, 7,   -1, 9, -1],
-        [1, -1, -1,   -1, -1, 8,   -1, -1, 4],
-        [-1, 2, -1,   -1, 5, -1,   -1, 7, -1]
+        [0, 6, 0,   4, 0, 7,   0, 9, 0],
+        [1, 0, 0,   0, 0, 8,   0, 0, 4],
+        [0, 2, 0,   0, 5, 0,   0, 7, 0]
     ]
-    if(solve_sudoku(example_board)):
-        print("Found Solution")
-        pprint(example_board)
 
+    script_start= datetime.now()
+    print("[%]Looking for solution...")
+    if(solve_sudoku(example_board)):
+        print("[*]solution found")
+        pprint(example_board)
+    else:
+        print("[x]please check your sudoku")
+    script_end_time = datetime.now()
+    print(f"time to find solution: {script_end_time-script_start}")
