@@ -1,9 +1,10 @@
- from pprint import pprint
+from pprint import pprint
+
 
 def find_next_empty(puzzle):
     """
     It returns the row and column of the next empty cell in the puzzle
-    
+
     :param puzzle: the puzzle to solve
     :return: The row and column of the next empty cell.
     """
@@ -16,7 +17,7 @@ def find_next_empty(puzzle):
 def is_valid(puzzle, guess, row, col):
     """
     If the guess is not in the row, column, or 3x3 box, then it's valid.
-    
+
     :param puzzle: the puzzle we're trying to solve
     :param guess: the number we're trying to place in the puzzle
     :param row: the row of the cell we're trying to fill
@@ -45,12 +46,12 @@ def solve_sudoku(puzzle):
     """
     If there are no empty cells, return True. Otherwise, try all possible guesses for the next empty
     cell, and if any of them work, return True
-    
+
     :param puzzle: The puzzle to solve
     :return: a boolean value.
     """
     row, col = find_next_empty(puzzle)
-    
+
     pprint(example_board)
     print("------------")
 
@@ -59,7 +60,7 @@ def solve_sudoku(puzzle):
 
     for guess in range(1, 10):
         if is_valid(puzzle, guess, row, col):
-        
+
             puzzle[row][col] = guess
 
             if solve_sudoku(puzzle):
@@ -83,5 +84,7 @@ if __name__ == '__main__':
         [1, -1, -1,   -1, -1, 8,   -1, -1, 4],
         [-1, 2, -1,   -1, 5, -1,   -1, 7, -1]
     ]
-    solve_sudoku(example_board)
-    pprint(example_board)
+    if(solve_sudoku(example_board)):
+        print("Found Solution")
+        pprint(example_board)
+
